@@ -6,6 +6,12 @@ tmp_dir = "tmp"
 github_base = "https://github.com/apigovau/"
 main_repo = github_base + "api-gov-au"
 deps = [github_base + "/repository"]
+mods = [
+    ("s/APIController/APIControllerX/g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
+    ("s/APIController/APIControllerX/g", build_dir + "/src/main/kotlin/au/gov/api/repository/GitHub.kt"),
+    ("s/com.github.apigovau:config:v1.0/com.github.apigovau:config:v1.3/g", build_dir + "/build.gradle"),
+    ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
+]
 
 
 
@@ -86,6 +92,26 @@ def write_new_build_gradlew():
     f.write("\n")
     f.close()
 
+
+
+def execute_sed(regex, theFile):
+    output = subprocess.call(["sed -i -e \"" + regex + "\" " +  theFile ],shell=True)
+
+
+def make_modifications():
+    print " - modifying code"
+    for mod in mods:
+        execute_sed(mod[0], mod[1])
+
+def create_env():
+    print " - creating environment variables"
+    f = open(build_dir + "/.env", "w")
+    f.write("config_environment=api.gov.au\n")
+    f.write("apigov.config.BaseRepoURI=http://localhost:5000/repository/\n")
+    f.close()
+
+
+
 print "Compiliing monolith deployment for api.gov.au"
 setup_folder(build_dir)
 if not is_cache_valid():
@@ -93,5 +119,7 @@ if not is_cache_valid():
     map(git_checkout, [main_repo] + deps)
 copy_repos_to_build()
 write_new_build_gradlew()
+make_modifications()
+create_env()
 print "done."
 
