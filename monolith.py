@@ -1,16 +1,23 @@
 #!/usr/bin/python
-import json, os, shutil, subprocess
+import json, os, shutil, subprocess, platform
 
+sed = 'sed'
+if platform.system() == 'Darwin': sed = 'gsed'
 build_dir = "build"
 tmp_dir = "tmp"
 github_base = "https://github.com/apigovau/"
 main_repo = github_base + "api-gov-au"
-deps = [github_base + "/repository"]
+deps = [
+        github_base + "/repository",
+        github_base + "/key-manager"
+]
 mods = [
-    ("s/APIController/APIControllerX/g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
-    ("s/APIController/APIControllerX/g", build_dir + "/src/main/kotlin/au/gov/api/repository/GitHub.kt"),
+    ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
+    ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/GitHub.kt"),
+    ("s/APIController/APIControllerRegistration/g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
     ("s/com.github.apigovau:config:v1.0/com.github.apigovau:config:v1.3/g", build_dir + "/build.gradle"),
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
+    ('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
 ]
 
 
@@ -95,7 +102,7 @@ def write_new_build_gradlew():
 
 
 def execute_sed(regex, theFile):
-    output = subprocess.call(["sed -i -e \"" + regex + "\" " +  theFile ],shell=True)
+    output = subprocess.call([sed + " -i -e \"" + regex + "\" " +  theFile ],shell=True)
 
 
 def make_modifications():
@@ -108,6 +115,7 @@ def create_env():
     f = open(build_dir + "/.env", "w")
     f.write("config_environment=api.gov.au\n")
     f.write("apigov.config.BaseRepoURI=http://localhost:5000/repository/\n")
+    f.write("apigov.config.AuthURI=http://localhost:5000/keys/producer/\n")
     f.close()
 
 
