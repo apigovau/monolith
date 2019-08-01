@@ -17,7 +17,8 @@ mods = [
     ("s/APIController/APIControllerRegistration/g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
     ("s/com.github.apigovau:config:v1.0/com.github.apigovau:config:v1.3/g", build_dir + "/build.gradle"),
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
-    ('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
+    ("s_Mapping(\\\"_Mapping(\\\"/keys/producer_g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
+#('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
 ]
 
 
@@ -116,6 +117,7 @@ def create_env():
     f.write("config_environment=api.gov.au\n")
     f.write("apigov.config.BaseRepoURI=http://localhost:5000/repository/\n")
     f.write("apigov.config.AuthURI=http://localhost:5000/keys/producer/\n")
+    f.write("BootstrapCredentials=abcd:1234\n")
     f.close()
 
 
