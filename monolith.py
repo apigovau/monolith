@@ -9,15 +9,18 @@ github_base = "https://github.com/apigovau/"
 main_repo = github_base + "api-gov-au"
 deps = [
         github_base + "/repository",
-        github_base + "/key-manager"
+        github_base + "/key-manager",
+        github_base + "/service-editor"
 ]
 mods = [
     ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
     ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/GitHub.kt"),
     ("s/APIController/APIControllerRegistration/g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
-    ("s/com.github.apigovau:config:v1.0/com.github.apigovau:config:v2.0/g", build_dir + "/build.gradle"),
+    ("s/com.github.apigovau:config:v1.0/com.github.apigovau:config:v2/g", build_dir + "/build.gradle"),
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
+    ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
     ("s_Mapping(\\\"_Mapping(\\\"/keys/producer_g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
+    ("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-default.properties")
 #('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
 ]
 
@@ -49,8 +52,9 @@ def is_cache_valid():
 
 
 def get_gradle_dependencies(folder):
-    print "   - getting gradle dependencies for " + folder.replace(tmp_dir + "/","") 
     build_gradle = folder + "/build.gradle"
+    if not os.path.exists(build_gradle): return 0,0,""
+    print "   - getting gradle dependencies for " + folder.replace(tmp_dir + "/","") 
     f = open(build_gradle, "r")
     build_file = f.readlines()
     f.close()
