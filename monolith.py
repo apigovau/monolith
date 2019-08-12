@@ -24,6 +24,17 @@ mods = [
 #('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
 ]
 
+def create_env():
+    print " - creating environment variables"
+    f = open(build_dir + "/.env", "w")
+    f.write("config_environment=api.gov.au\n")
+    f.write("apigov_config_BaseRepoURI=http://localhost:5000/repository/\n")
+    f.write("apigov_config_AuthURI=http://localhost:5000/keys/producer/\n")
+    f.write("BootstrapCredentials=abcd:1234\n")
+    f.close()
+
+
+
 
 
 def setup_folder(folder):
@@ -114,16 +125,6 @@ def make_modifications():
     print " - modifying code"
     for mod in mods:
         execute_sed(mod[0], mod[1])
-
-def create_env():
-    print " - creating environment variables"
-    f = open(build_dir + "/.env", "w")
-    f.write("config_environment=api.gov.au\n")
-    f.write("apigov_config_BaseRepoURI=http://localhost:5000/repository/\n")
-    f.write("apigov_config_AuthURI=http://localhost:5000/keys/producer/\n")
-    f.write("BootstrapCredentials=abcd:1234\n")
-    f.close()
-
 
 
 print "Compiliing monolith deployment for api.gov.au"
