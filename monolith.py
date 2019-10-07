@@ -16,6 +16,22 @@ mods = [
     ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
     ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/GitHub.kt"),
     ("s/APIController/APIControllerRegistration/g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
+
+
+    ("s/DictionaryService/DictionaryServiceRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DictionaryService.kt"),
+    ("s/SynonymRepository/SynonymRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/SynonymRepository.kt"),
+    ("s/SyntaxRepository/SyntaxRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/SyntaxRepository.kt"),
+    ("s/RelationshipRepository/RelationshipRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/RelationshipRepository.kt"),
+    ("s/DefinitionRepository/DefinitionRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionRepository.kt"),
+    ("s/DefinitionsController/DefinitionsRepositoryController/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
+    ("s/RelationshipRepository/RelationshipRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
+    ("s/DictionaryService/DictionaryServiceRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
+    ("s/SyntaxRepository/SyntaxRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
+    ("s/SynonymRepository/SynonymRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
+    ("s/DefinitionRepository/DefinitionRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
+    ("s/DefinitionRepository/DefinitionRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DictionaryService.kt"),
+    ("s/SynonymRepository/SynonymRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionRepository.kt"),
+
     ("s/com.github.apigovau:config:v1.0/com.github.apigovau:config:v2/g", build_dir + "/build.gradle"),
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
