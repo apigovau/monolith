@@ -18,6 +18,9 @@ mods = [
     ("s/APIController/APIControllerRegistration/g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
 
 
+    ("s/RelationshipRepository/RelationshipRepositoryRepository/g", build_dir + "/src/test/kotlin/au/gov/api/definitions/RelationshipServiceTest.kt"),
+    ("s/SynonymRepository/SynonymRepositoryRepository/g", build_dir + "/src/test/kotlin/au/gov/api/definitions/SynonymServiceTest.kt"),
+    ("s/DictionaryService/DictionaryServiceRepository/g", build_dir + "/src/test/kotlin/au/gov/api/definitions/DictionaryServiceTest.kt"),
     ("s/DictionaryService/DictionaryServiceRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DictionaryService.kt"),
     ("s/SynonymRepository/SynonymRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/SynonymRepository.kt"),
     ("s/SyntaxRepository/SyntaxRepositoryRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/SyntaxRepository.kt"),
