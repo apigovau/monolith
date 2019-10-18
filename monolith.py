@@ -39,13 +39,19 @@ mods = [
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
     ("s_Mapping(\\\"_Mapping(\\\"/repository_g", build_dir + "/src/main/kotlin/au/gov/api/repository/definitions/DefinitionsController.kt"),
     ("s_Mapping(\\\"_Mapping(\\\"/keys/producer_g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
-    ("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-default.properties")
+    ("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-default.properties"),
+
+
+    ("s_\(\s*\)\(.*requiresSecure.*\)_//\\1No https for monolith\\n//\\1\\2_g", build_dir + "/src/main/kotlin/au/gov/api/SecurityConfig.kt"), 
+#("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-prod.properties")
 #('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
 ]
 
 def create_env():
     print " - creating environment variables"
     f = open(build_dir + "/.env", "w")
+    f.write("spring_profiles_active=prod\n")
+    f.write("JDBC_DATABASE_URL=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword\n")
     f.write("config_environment=api.gov.au\n")
     f.write("apigov_config_BaseRepoURI=http://localhost:5000/repository/\n")
     f.write("apigov_config_AuthURI=http://localhost:5000/keys/producer/\n")
