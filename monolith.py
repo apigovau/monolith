@@ -10,7 +10,8 @@ main_repo = github_base + "api-gov-au"
 deps = [
         github_base + "/repository",
         github_base + "/key-manager",
-        github_base + "/service-editor"
+        github_base + "/service-editor",
+        github_base + "/console",
 ]
 mods = [
     ("s/APIController/APIControllerRepository/g", build_dir + "/src/main/kotlin/au/gov/api/repository/APIController.kt"),
@@ -42,7 +43,7 @@ mods = [
     ("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-default.properties"),
 
 
-    ("s_\(\s*\)\(.*requiresSecure.*\)_//\\1No https for monolith\\n//\\1\\2_g", build_dir + "/src/main/kotlin/au/gov/api/SecurityConfig.kt"), 
+    ("s_\(\s*\)\(.*requiresSecure.*\)_//\\1Disable CSRF and HTTPS\\n\\1http.csrf().disable()\\n//\\1\\2_g", build_dir + "/src/main/kotlin/au/gov/api/SecurityConfig.kt"), 
 #("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-prod.properties")
 #('$!N; s/@Autowired\s*\\n.*DataSource/private var dataSource: DataSource = dataSource()!!/g', build_dir + "/src/main/kotlin/au/gov/api/registration/RegistrationManager.kt")
 ]
