@@ -42,6 +42,14 @@ mods = [
     ("s_Mapping(\\\"_Mapping(\\\"/keys/producer_g", build_dir + "/src/main/kotlin/au/gov/api/registration/APIController.kt"),
     ("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-default.properties"),
 
+    ("s/.*playbook.*//g", build_dir + "/src/main/resources/templates/fragments/layout.html"),
+    ("s/.*'about'.*//g", build_dir + "/src/main/resources/templates/fragments/layout.html"),
+    ("s/.*'share'.*//g", build_dir + "/src/main/resources/templates/fragments/layout.html"),
+    ("s/.*'definitions'.*//g", build_dir + "/src/main/resources/templates/fragments/layout.html"),
+    ("s/.*'community'.*//g", build_dir + "/src/main/resources/templates/fragments/layout.html"),
+    ("s/.*githubLink.*//g", build_dir + "/src/main/resources/templates/fragments/layout.html"),
+
+    ("s/'1.0'/'1.1'/g", build_dir + "/build.gradle"),
 
     ("s_\(\s*\)\(.*requiresSecure.*\)_//\\1Disable CSRF and HTTPS\\n\\1http.csrf().disable()\\n//\\1\\2_g", build_dir + "/src/main/kotlin/au/gov/api/SecurityConfig.kt"), 
 #("\\$aspring.datasource.url=jdbc:postgresql://localhost:5432/postgres?user=postgres&password=mysecretpassword",build_dir + "/src/main/resources/application-prod.properties")
